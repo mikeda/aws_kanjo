@@ -1,4 +1,8 @@
 body{
   min-width: 400px;
-  min-height: 200px;
+  min-height: 400px;
+}
+
+#ec2-price-csv{
+  width: 100%;
 }

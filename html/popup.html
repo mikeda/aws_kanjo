@@ -12,13 +12,12 @@
     <header class="navbar navbar-default" role="navigation">
       <div class="container">
         <div class="navbar-header">
-          <h1>STOP AWS破産</h1>
+          <h2>STOP AWS破産</h2>
         </div>
       </div>
     </header>
 
     <div class="container">
-      <h3>EC2価格一覧</h3>
       <div class="btn-group">
         <button id="region-btn" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
         </button>
@@ -27,13 +26,24 @@
       </div>
 
       <div>
-        <ul>
-          <li>円相場: <span class="yen-rate"></span></li>
-          <li>OS: <span class="os">Linux</span></li>
-        </ul>
+        円相場: <span class="yen-rate"></span> /
+        OS: <span class="os">Linux</span>
       </div>
 
-      <div id="ec2-price"></div>
+      <ul class="nav nav-tabs">
+        <li class="active"><a href="#ed2-price-list-tab" data-toggle="tab">一覧</a></li>
+        <li><a href="#ed2-price-csv-tab" data-toggle="tab">CSV</a></li>
+      </ul>
+
+      <div class="tab-content">
+        <div id="ed2-price-list-tab" class="tab-pane active">
+          <div id="ec2-price-list">
+          </div>
+        </div>
+
+        <div id="ed2-price-csv-tab" class="tab-pane">
+          <textarea id="ec2-price-csv" rows="20"></textarea>
+        </div>
       </div>
     </div>
 
