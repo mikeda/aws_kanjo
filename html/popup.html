@@ -18,15 +18,22 @@
     </header>
 
     <div class="container">
+      <h3>EC2価格一覧</h3>
+      <div class="btn-group">
+        <button id="region-btn" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+        </button>
+        <ul id="region-list" class="dropdown-menu" role="menu">
+        </ul>
+      </div>
+
       <div>
         <ul>
           <li>円相場: <span class="yen-rate"></span></li>
           <li>OS: <span class="os">Linux</span></li>
-          <li>Region: <span class="region">日本</span></li>
         </ul>
       </div>
+
       <div id="ec2-price"></div>
-      <div id="ec2-price-previous"></div>
       </div>
     </div>
 

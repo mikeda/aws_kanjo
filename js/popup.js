@@ -1,6 +1,22 @@
 $(function(){
-  function update_ec2_price(ec2_price, yen_rate){
-    var region = "ap-northeast-1";
+  var regions = [
+    "us-east-1",
+    "us-west-2",
+    "us-west-1",
+    "eu-west-1",
+    "eu-central-1",
+    "ap-southeast-1",
+    "ap-northeast-1",
+    "ap-southeast-2",
+    "sa-east-1"
+  ];
+  var default_region = "ap-northeast-1";
+  var ec2_price = null;
+  var yen_rate = null;
+
+  function update_ec2_price(ec2_price, region, yen_rate){
+    $("#ec2-price").empty();
+
     $.each(ec2_price[region], function(i, instanceType){
       var table = $('<table class="table table-striped table-condensed">');
       table.append('<caption class="text-left">' + instanceType.type + '</caption>');
@@ -28,11 +44,23 @@ $(function(){
     });
   }
 
-  get_yen_rate(function(yen_rate){
+  $.each(regions, function(){
+    $("#region-list").append('<li><a href="#">' + this + '</a></li>');
+  });
+  $("#region-btn").html(default_region + ' <span class="caret"></span>');
+  $("#region-list li").on("click", function(){
+    var region = $(this).text();
+    $("#region-btn").html(region + ' <span class="caret"></span>');
+    update_ec2_price(ec2_price, region, yen_rate);
+  });
+
+  get_yen_rate(function(_yen_rate){
+    yen_rate = _yen_rate;
     $(".yen-rate").text(yen_rate);
 
-    get_ec2_price(function(ec2_price){
-      update_ec2_price(ec2_price, yen_rate);
+    get_ec2_price(function(_ec2_price){
+      ec2_price = _ec2_price;
+      update_ec2_price(ec2_price, default_region, yen_rate);
     });
 
   });
