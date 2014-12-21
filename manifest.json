@@ -1,0 +1,31 @@
+{
+  "name": "aws_kanjo",
+  "description": "AWS勘定",
+  "version": "0.0.1",
+  "manifest_version": 2,
+  "permissions": [
+    "https://a0.awsstatic.com/*",
+    "https://rate-exchange.appspot.com/*"
+  ],
+  "content_security_policy": "script-src 'self' https://a0.awsstatic.com; object-src 'self'",
+  "browser_action": {
+    "default_icon": "icon38.png",
+    "default_title": "aws_kanjo",
+    "default_popup": "html/popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://ap-northeast-1.console.aws.amazon.com/ec2/v2/home?*"
+      ],
+      "js": [
+        "/js/jquery-2.1.1.min.js",
+        "/js/util.js",
+        "/js/management_console/ec2.js"
+      ]
+    }
+  ],
+  "background": {
+    "page": "/html/background.html"
+  }
+}
