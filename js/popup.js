@@ -29,8 +29,7 @@ $(function(){
       var tbody = $('<tbody>');
       $.each(instanceType.sizes, function(i, size){
         var usd = parseFloat(size.valueColumns[0].prices.USD);
-        var yen = Math.ceil(usd * yen_rate);
-        var yen_per_month = yen * 24 * 30;
+        var yen_per_month = usd_to_yen_per_month(usd, yen_rate);
         var td = $('<tr>')
           .append('<th ">' + size.size + '</th>')
           .append('<td align="right">' + size.vCPU + '</td>')
@@ -53,8 +52,7 @@ $(function(){
     $.each(ec2_price[region], function(i, instanceType){
       $.each(instanceType.sizes, function(i, size){
         var usd = parseFloat(size.valueColumns[0].prices.USD);
-        var yen = Math.ceil(usd * yen_rate);
-        var yen_per_month = yen * 24 * 30;
+        var yen_per_month = usd_to_yen_per_month(usd, yen_rate);
         lines.push( [
           size.size,
           size.vCPU,
@@ -66,6 +64,12 @@ $(function(){
     });
     $("#ec2-price-csv").text(lines.join("\n"));
   }
+
+  $("#calculate-price").click(function(){
+    var usd = parseFloat($("#price-usd").val());
+    var yen_per_month = usd_to_yen_per_month(usd, yen_rate);
+    $("#price-yen").val(yen_per_month);
+  });
 
   $.each(regions, function(){
     $("#region-list").append('<li><a href="#">' + this + '</a></li>');

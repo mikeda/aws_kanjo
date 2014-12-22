@@ -21,3 +21,7 @@ function get_yen_rate(callback){
     }
   });
 }
+
+function usd_to_yen_per_month(usd, yen_rate){
+  return Math.ceil(usd * 24 * 30 * yen_rate);
+}

@@ -28,7 +28,7 @@ $(function(){
           var yen_per_month = 0;
           if(state == "running"){
             var usd = ec2_price[region][instanceType];
-            yen_per_month = Math.ceil(usd * yen_rate) * 24 * 30;
+            var yen_per_month = usd_to_yen_per_month(usd, yen_rate);
           }
 
           td.attr("width", "400");
