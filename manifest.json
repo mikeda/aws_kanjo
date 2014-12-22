@@ -1,7 +1,7 @@
 {
   "name": "aws_kanjo",
   "description": "AWS勘定",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "manifest_version": 2,
   "permissions": [
     "https://a0.awsstatic.com/*",
