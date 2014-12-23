@@ -29,7 +29,7 @@ $(function(){
       var tbody = $('<tbody>');
       $.each(instanceType.sizes, function(i, size){
         var usd = parseFloat(size.valueColumns[0].prices.USD);
-        var yen_per_month = usd_to_yen_per_month(usd, yen_rate);
+        var yen_per_month = FrontUtil.usd_to_yen_per_month(usd, yen_rate);
         var td = $('<tr>')
           .append('<th ">' + size.size + '</th>')
           .append('<td align="right">' + size.vCPU + '</td>')
@@ -52,7 +52,7 @@ $(function(){
     $.each(ec2_price[region], function(i, instanceType){
       $.each(instanceType.sizes, function(i, size){
         var usd = parseFloat(size.valueColumns[0].prices.USD);
-        var yen_per_month = usd_to_yen_per_month(usd, yen_rate);
+        var yen_per_month = FrontUtil.usd_to_yen_per_month(usd, yen_rate);
         lines.push( [
           size.size,
           size.vCPU,
@@ -67,7 +67,7 @@ $(function(){
 
   $("#calculate-price").click(function(){
     var usd = parseFloat($("#price-usd").val());
-    var yen_per_month = usd_to_yen_per_month(usd, yen_rate);
+    var yen_per_month = FrontUtil.usd_to_yen_per_month(usd, yen_rate);
     $("#price-yen").val(yen_per_month);
   });
 
@@ -82,11 +82,11 @@ $(function(){
     update_ec2_price_csv(ec2_price, region, yen_rate);
   });
 
-  get_yen_rate(function(_yen_rate){
+  FrontUtil.get_yen_rate(function(_yen_rate){
     yen_rate = _yen_rate;
     $(".yen-rate").text(yen_rate);
 
-    get_ec2_price(function(_ec2_price){
+    FrontUtil.get_ec2_price(function(_ec2_price){
       ec2_price = _ec2_price;
       update_ec2_price(ec2_price, default_region, yen_rate);
       update_ec2_price_csv(ec2_price, default_region, yen_rate);
